@@ -1,7 +1,7 @@
 # AI PRODUCTION AGENT TEAM SPECIFICATION
 
 **Document ID:** AI-AGENT-TEAM-DeadManAI-2026
-**Date Compiled:** 2026-01-03
+**Date Compiled:** 2026-01-10
 **Category:** Production Automation Architecture
 **Status:** PRODUCTION READY
 **Applicability:** HIGH (Core automation infrastructure)
@@ -21,13 +21,14 @@ This document specifies the complete AI agent team for automating and augmenting
 ### 1.2 Agent Architecture
 
 ```
-PRODUCTION AGENT TEAM (5 Categories, 15 Specialized Agents)
+PRODUCTION AGENT TEAM (5 Categories, 16 Specialized Agents)
 ═══════════════════════════════════════════════════════════
 
 ┌─────────────────────────────────────────────────────────┐
-│ RESEARCH AGENTS (3)                                     │
+│ RESEARCH AGENTS (4)                                     │
 ├─────────────────────────────────────────────────────────┤
 │ → Trend Scanner                                         │
+│ → Deep Research Agent (NEW)                             │
 │ → Keyword Researcher                                    │
 │ → Audience Analyst                                      │
 └─────────────────────────────────────────────────────────┘
@@ -73,6 +74,7 @@ PRODUCTION AGENT TEAM (5 Categories, 15 Specialized Agents)
 
 **Core Systems:**
 - **Claude Agent SDK**: Custom agent deployment framework
+- **DeadMan Intelligence Bridge**: Offline scraping & deep research integration
 - **Fabric Patterns**: 234+ production-ready AI patterns
 - **Planning Files**: YouTube Planning Files integration for project management
 - **Session Continuity**: 5-minute checkpoint protocol for disconnection recovery
@@ -88,6 +90,7 @@ PRODUCTION AGENT TEAM (5 Categories, 15 Specialized Agents)
 **Scope**:
 - Platform monitoring (YouTube, TikTok, Instagram, X)
 - Trend detection (search volume surges, hashtag velocity)
+- **Deep Intelligence Integration** (Recursive LM findings, Archive data)
 - Viral mechanic identification (STEPPS framework analysis)
 - Opportunity scoring (Search Demand Ratio calculation)
 
@@ -96,11 +99,13 @@ PRODUCTION AGENT TEAM (5 Categories, 15 Specialized Agents)
 INPUT:
   - Niche specification (content pillars from R63)
   - Geographic targeting (US/CA/UK priority per CPM analysis)
+  - DeadMan Bridge Reports (Offline/Technical Intel)
   - Update frequency (daily scan recommended)
 
 OUTPUT:
   - trend_report_YYYY_MM_DD.md:
       - Top 10 trending topics in niche
+      - Deep Research opportunities (from Bridge)
       - Search volume data (Google Trends, VidIQ)
       - Viral coefficient estimates (K-factor)
       - STEPPS scores (0-30 scale)
@@ -108,6 +113,7 @@ OUTPUT:
 ```
 
 **Tool Access Requirements**:
+- DeadMan Intelligence Bridge (local script execution)
 - VidIQ API (trend analytics)
 - Google Trends API (search volume)
 - YouTube Data API v3 (video performance)
@@ -120,6 +126,7 @@ OUTPUT:
 
 **Integration Points**:
 - → Keyword Researcher (passes selected trends for SEO analysis)
+- → Deep Research Agent (handoff for technical deep dives)
 - → Hook Generator (provides trending hooks/angles)
 - → Growth Strategist (feeds competitive intelligence)
 
@@ -131,6 +138,10 @@ OUTPUT:
 **Error Handling**:
 ```python
 # Trend Scanner error protocols
+if bridge_connection_failed:
+    log_event("Offline intelligence unavailable")
+    proceed_with_live_api_data_only()
+
 if api_rate_limit_exceeded:
     fallback_to_manual_scraping()
     log_event(priority='medium')
@@ -138,15 +149,58 @@ if api_rate_limit_exceeded:
 if trend_detection_confidence < 70%:
     flag_for_human_review()
     include_raw_data_for_manual_analysis()
-
-if no_trends_detected_72h:
-    expand_search_radius()
-    notify_human('Trend drought - niche saturation warning')
 ```
 
 ---
 
-### 2.2 AGENT: Keyword Researcher
+### 2.2 AGENT: Deep Research Agent (NEW)
+
+**Primary Function**: Execute recursive deep dives on complex topics using the Intelligence Bridge
+
+**Scope**:
+- **Recursive Language Model (RLM) Operations**: Handling unbounded context (10M+ tokens) via Python REPL
+- **Offline Archive Analysis**: Processing Wikipedia, BlackHatWorld, and historical archives (e.g., Stewart Cheifet)
+- **Technical Synthesis**: Converting raw scraped data into structured content pillars
+- **Trend Validation**: Cross-referencing viral trends with deep technical reality
+
+**Input/Output Interface**:
+```yaml
+INPUT:
+  - Topic/Keyword (from Trend Scanner)
+  - Bridge Data Sources (recursive_lm_intel.json, etc.)
+  - Depth Level (Surface, Technical, Academic, Underground)
+
+OUTPUT:
+  - deep_dive_brief_[TOPIC].md:
+      - Historical Context (Timeline/Origins)
+      - Technical Mechanics (How it works)
+      - Key Figures (Biographical data)
+      - Underground/Niche Angles (BlackHatWorld insights)
+      - Content Opportunities (Uncovered angles)
+```
+
+**Tool Access Requirements**:
+- `deadman_intelligence_bridge.py`
+- Local `Data/` repository access
+- Python REPL environment (for RLM execution)
+- NLP Summarization (Claude/Fabric)
+
+**Human Approval Gates**:
+- **Gate 1**: Insight Validation (human confirms technical accuracy of synthesized findings)
+
+**Integration Points**:
+- ← Trend Scanner (receives broad topics)
+- → Fact Checker (provides primary source data)
+- → Structure Optimizer (provides dense information blocks)
+
+**Success Metrics**:
+- Unique angle discovery: >1 per brief (finding what others missed)
+- Technical accuracy: >95% (verified by human expert)
+- Data utilization: 100% of relevant bridge data incorporated
+
+---
+
+### 2.3 AGENT: Keyword Researcher
 
 **Primary Function**: SEO and keyword strategy optimization for video discoverability
 
@@ -210,7 +264,7 @@ if zero_search_volume:
 
 ---
 
-### 2.3 AGENT: Audience Analyst
+### 2.4 AGENT: Audience Analyst
 
 **Primary Function**: Analyze audience behavior, engagement patterns, and persona development
 
@@ -2237,6 +2291,7 @@ Generate 5 hook variants now for topic: [TOPIC]
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.0 | 2026-01-10 | Added Deep Research Agent and Intelligence Bridge integration. Enhanced Trend Scanner with offline intelligence inputs. |
 | 1.0.0 | 2026-01-03 | Initial AI Production Agent Team specification - 15 agents across 5 categories (Research, Scriptwriting, Production, Publishing, Analytics), full integration with CLAUDE.md 3-Factor Ruling, NASA NPR compliance, Fabric patterns, Planning Files, Session Continuity |
 
 ---
